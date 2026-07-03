@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { useClipboardStore } from '../store/clipboardStore';
+import { API_BASE_URL } from '../services/api';
 export function useWebSocket() {
     const socketRef = useRef(null);
     const { prependItem, updateItemInList, removeItemFromList } = useClipboardStore();
     useEffect(() => {
-        const socket = io('/', {
+        const socket = io(API_BASE_URL || '/', {
             path: '/ws/socket.io',
             transports: ['websocket'],
         });

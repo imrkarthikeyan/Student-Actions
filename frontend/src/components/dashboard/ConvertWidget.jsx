@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { RefreshCw, UploadCloud, Download } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { convertService } from '../../services/convertService';
+import { resolveStorageUrl } from '../../services/api';
 import { Button } from '../ui/Button';
 import { FeatureCard } from './FeatureCard';
 function extOf(name) {
@@ -46,7 +47,7 @@ export function ConvertWidget() {
     return (<FeatureCard icon={<RefreshCw className="w-4 h-4"/>} title="Quick Convert" to="/convert">
       {result ? (<div className="flex flex-col items-center gap-3 py-4">
           <p className="text-sm text-gray-200 truncate max-w-full">{result.file_name}</p>
-          <a href={result.file_url} download={result.file_name}>
+          <a href={resolveStorageUrl(result.file_url)} download={result.file_name}>
             <Button size="sm"><Download className="w-3.5 h-3.5"/> Download</Button>
           </a>
           <Button variant="outline" size="xs" onClick={() => { setFile(null); setResult(null); }}>Convert another</Button>

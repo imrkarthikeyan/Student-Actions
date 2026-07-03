@@ -75,6 +75,11 @@ fastapi_app.add_middleware(
 )
 
 
+@fastapi_app.get("/healthz")
+async def healthz():
+    return {"status": "ok"}
+
+
 @fastapi_app.exception_handler(ValueError)
 async def value_error_handler(request: Request, exc: ValueError):
     return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(exc)})

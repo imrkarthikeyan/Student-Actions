@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings
+from pydantic import field_validator
 from typing import List, Optional
 from functools import lru_cache
 
@@ -62,6 +63,18 @@ class Settings(BaseSettings):
     PUBLIC_USER_ID: str = "00000000-0000-0000-0000-000000000001"
     PUBLIC_USERNAME: str = "public"
     PUBLIC_EMAIL: str = "public@smartsync.local"
+
+    @field_validator("DATABASE_URL")
+    @classmethod
+    def _use_asyncpg_driver(cls, v: str) -> str:
+        # Managed Postgres providers (Render, Heroku, etc.) hand out plain
+        # postgres://.../postgresql://... URLs — SQLAlchemy's async engine needs
+        # the asyncpg driver explicitly in the scheme.
+        if v.startswith("postgres://"):
+            return "postgresql+asyncpg://" + v[len("postgres://"):]
+        if v.startswith("postgresql://"):
+            return "postgresql+asyncpg://" + v[len("postgresql://"):]
+        return v
 
     class Config:
         env_file = ".env"

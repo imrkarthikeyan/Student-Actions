@@ -5,6 +5,7 @@ import { Header } from '../components/layout/Header';
 import { Button } from '../components/ui/Button';
 import { Textarea } from '../components/ui/Textarea';
 import { shareService } from '../services/shareService';
+import { resolveStorageUrl } from '../services/api';
 import { formatBytes } from '../utils/format';
 const EXPIRY_OPTIONS = [
     { label: '10 minutes', value: 10 },
@@ -150,7 +151,7 @@ function ReceiveCard() {
                 <p className="text-sm text-gray-200 truncate">{result.file_name}</p>
                 <p className="text-xs text-gray-500">{result.file_size ? formatBytes(result.file_size) : ''}</p>
               </div>
-              <a href={result.file_url} download={result.file_name} className="p-2 rounded-lg text-gray-400 hover:text-gray-100 hover:bg-gray-700 transition-colors shrink-0" title="Download">
+              <a href={resolveStorageUrl(result.file_url)} download={result.file_name} className="p-2 rounded-lg text-gray-400 hover:text-gray-100 hover:bg-gray-700 transition-colors shrink-0" title="Download">
                 <Download className="w-4 h-4"/>
               </a>
             </div>)}

@@ -1,0 +1,54 @@
+# Slim requirements for hosting (Render, etc.).
+#
+# Excludes sentence-transformers/faiss-cpu/easyocr/openai/langchain/celery/boto3
+# from requirements.txt: they pull in torch and multi-GB downloads that blow
+# past free-tier build limits, and every import of them in app/services is a
+# lazy, try/except-guarded import — the app runs fine without them as long as
+# OPENAI_API_KEY is unset and OCR_ENABLED=false (semantic search and AI
+# commands just no-op instead of crashing). Add a package back here if you
+# turn one of those features on in production.
+
+# Web framework
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+python-multipart==0.0.12
+
+# Database
+sqlalchemy[asyncio]==2.0.36
+asyncpg==0.30.0
+alembic==1.14.0
+psycopg2-binary==2.9.10
+
+# Cache & messaging
+redis[hiredis]==5.2.0
+
+# Auth & security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+cryptography==49.0.0
+pydantic[email]==2.10.3
+pydantic-settings==2.6.1
+
+# Rate limiting
+slowapi==0.1.9
+
+# Real-time
+python-socketio==5.11.4
+python-engineio==4.10.1
+
+# HTTP client
+httpx==0.28.1
+
+# File conversion (Quick Convert)
+Pillow==11.0.0
+pymupdf==1.24.14
+python-docx==1.1.2
+mammoth==1.8.0
+xhtml2pdf==0.2.16
+pdf2docx==0.5.8
+
+# File I/O
+aiofiles==24.1.0
+
+# Utilities
+python-dotenv==1.0.1

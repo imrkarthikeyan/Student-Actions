@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { io } from 'socket.io-client';
+import { API_BASE_URL } from '../services/api';
 const ICE_SERVERS = {
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
 };
@@ -65,7 +66,7 @@ export function useMeetingCall(roomCode, displayName, enabled) {
                 setError('Could not access camera or microphone. Check browser permissions and try again.');
                 return;
             }
-            const socket = io('/', { path: '/ws/socket.io', transports: ['websocket'] });
+            const socket = io(API_BASE_URL || '/', { path: '/ws/socket.io', transports: ['websocket'] });
             socketRef.current = socket;
             socket.on('connect', () => {
                 setConnected(true);

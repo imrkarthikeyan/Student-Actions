@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { Header } from '../components/layout/Header';
 import { Button } from '../components/ui/Button';
 import { convertService } from '../services/convertService';
+import { resolveStorageUrl } from '../services/api';
 import { formatBytes } from '../utils/format';
 function extOf(name) {
     const ext = name.split('.').pop()?.toLowerCase() ?? '';
@@ -75,7 +76,7 @@ export function ConvertPage() {
               <FileType className="w-10 h-10 text-brand-600"/>
               <p className="text-sm text-gray-200">{result.file_name}</p>
               <p className="text-xs text-gray-500">{formatBytes(result.file_size)}</p>
-              <a href={result.file_url} download={result.file_name}>
+              <a href={resolveStorageUrl(result.file_url)} download={result.file_name}>
                 <Button>
                   <Download className="w-4 h-4"/> Download
                 </Button>
