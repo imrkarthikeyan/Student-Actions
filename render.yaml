@@ -43,7 +43,7 @@ services:
           name: clipninja-redis
           property: connectionString
       - key: ALLOWED_ORIGINS
-        value: '["https://clipninja-frontend.onrender.com"]'
+        value: '["https://student-actions.onrender.com","https://clipninja-frontend.onrender.com"]'
 
   - type: web
     name: clipninja-frontend
