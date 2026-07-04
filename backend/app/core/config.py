@@ -50,7 +50,12 @@ class Settings(BaseSettings):
     RATE_LIMIT_PER_HOUR: int = 1000
 
     # CORS
-    ALLOWED_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:5173"]
+    ALLOWED_ORIGINS: List[str] = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "https://student-actions.onrender.com",
+        "https://clipninja-frontend.onrender.com",
+    ]
 
     # Celery / Background workers
     CELERY_BROKER_URL: str = "redis://localhost:6379/2"
@@ -75,6 +80,36 @@ class Settings(BaseSettings):
         if v.startswith("postgresql://"):
             return "postgresql+asyncpg://" + v[len("postgresql://"):]
         return v
+
+    @field_validator("ALLOWED_ORIGINS", mode="before")
+    @classmethod
+    def _merge_allowed_origins(cls, v):
+        fallback_origins = [
+            "http://localhost:3000",
+            "http://localhost:5173",
+            "https://student-actions.onrender.com",
+            "https://clipninja-frontend.onrender.com",
+        ]
+        if v is None:
+            return fallback_origins
+        if isinstance(v, str):
+            import json
+
+            try:
+                parsed = json.loads(v)
+                if isinstance(parsed, list):
+                    v = parsed
+                else:
+                    v = [v]
+            except Exception:
+                v = [item.strip() for item in v.split(",") if item.strip()]
+        if isinstance(v, list):
+            merged = []
+            for origin in fallback_origins + v:
+                if origin not in merged:
+                    merged.append(origin)
+            return merged
+        return fallback_origins
 
     class Config:
         env_file = ".env"
