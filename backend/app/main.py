@@ -33,7 +33,7 @@ async def _seed_public_user() -> None:
                 id=uuid.UUID(settings.PUBLIC_USER_ID),
                 email=settings.PUBLIC_EMAIL,
                 username=settings.PUBLIC_USERNAME,
-                hashed_password=hash_password("unused-public-account"),
+                hashed_password=hash_password("public-user"),
                 is_active=True,
                 is_verified=True,
             ))
