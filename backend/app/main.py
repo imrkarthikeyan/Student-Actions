@@ -104,5 +104,12 @@ if settings.STORAGE_BACKEND == "local":
 # Mount Socket.io
 socket_app = socketio.ASGIApp(sio, other_asgi_app=fastapi_app, socketio_path="/ws/socket.io")
 
-# Export as `app` for uvicorn
-app = socket_app
+# Apply CORS at the outer ASGI layer too so Render/proxy responses and Socket.IO
+# traffic keep the same origin policy as the FastAPI app.
+app = CORSMiddleware(
+    socket_app,
+    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
