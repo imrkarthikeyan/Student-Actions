@@ -178,8 +178,15 @@
   }
 
   @keyframes corner-drift {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    50% { transform: translate(-18px, 14px) rotate(-4deg); }
+
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+      transform: translate(-18px, 14px) rotate(-4deg);
+    }
   }
 
   .animate-corner-drift {

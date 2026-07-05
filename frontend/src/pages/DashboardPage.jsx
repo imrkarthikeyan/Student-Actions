@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Clipboard, GraduationCap, Share2, Sparkles, Video, Workflow } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Clipboard, GraduationCap, RefreshCw, Share2, Sparkles, Video, Workflow } from 'lucide-react';
 
 const actionLinks = [
   { to: '/clipboard', icon: Clipboard, title: 'Clipboard', description: 'Capture, search, and sync items without friction.' },
+  { to: '/convert', icon: RefreshCw, title: 'Quick Convert', description: 'Turn files into the right format from one shortcut.' },
   { to: '/share', icon: Share2, title: 'Share', description: 'Generate clean share links and move content fast.' },
   { to: '/meetings', icon: Video, title: 'Meetings', description: 'Launch or join a polished live room.' },
   { to: '/workspaces', icon: Workflow, title: 'Workspaces', description: 'Keep everything organized for a team or project.' },
@@ -56,77 +57,82 @@ function StudentGraphic() {
 export function DashboardPage() {
   return (<div className="relative min-h-screen overflow-hidden">
     <div className="ambient-bg" />
-      <div className="relative z-10 flex min-h-screen flex-col gap-8 p-4 sm:p-6 lg:p-8">
-        <section className="relative overflow-hidden rounded-[3rem] bg-[radial-gradient(circle_at_top_left,rgba(224,20,20,0.15),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.92),rgba(255,247,247,0.68)_40%,rgba(247,247,248,0.94)_100%)] p-6 sm:p-8 lg:p-10 shadow-soft-lg animate-rise">
-          <div className="absolute right-3 top-3 sm:right-8 sm:top-6">
-            <StudentGraphic />
+    <div className="relative z-10 flex min-h-screen flex-col gap-8 p-4 sm:p-6 lg:p-8">
+      <section className="relative overflow-hidden rounded-[3rem] bg-[radial-gradient(circle_at_top_left,rgba(224,20,20,0.15),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.92),rgba(255,247,247,0.68)_40%,rgba(247,247,248,0.94)_100%)] p-6 sm:p-8 lg:p-10 shadow-soft-lg animate-rise">
+        <div className="absolute right-3 top-3 sm:right-8 sm:top-6">
+          <StudentGraphic />
+        </div>
+
+        <div className="relative max-w-4xl pr-0 sm:pr-24 lg:pr-32">
+          <div className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.34em] text-brand-700/90">
+            <span className="h-px w-10 bg-gradient-to-r from-brand-600/10 via-brand-600 to-brand-600/10" />
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>Professional workspace</span>
+          </div>
+          <h1 className="mt-5 max-w-3xl text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-gray-100 leading-[0.9]">
+            A fluid platform for clipboard, sharing, and live meetings.
+          </h1>
+          <p className="mt-5 max-w-2xl text-base sm:text-lg text-gray-500 leading-relaxed">
+            The app opens on a quieter, more editorial dashboard with a slow student animation in the corner, so the platform feels branded and intentional before the workspace appears.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/clipboard" className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-soft-lg transition-transform hover:-translate-y-0.5">
+              Open clipboard
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link to="/convert" className="inline-flex items-center gap-2 rounded-full bg-white/70 px-5 py-3 text-sm font-semibold text-gray-100 shadow-soft transition-transform hover:-translate-y-0.5">
+              Quick convert
+              <RefreshCw className="w-4 h-4" />
+            </Link>
+            <Link to="/share" className="inline-flex items-center gap-2 rounded-full bg-white/70 px-5 py-3 text-sm font-semibold text-gray-100 shadow-soft transition-transform hover:-translate-y-0.5">
+              Create a share
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link to="/meetings" className="inline-flex items-center gap-2 rounded-full bg-white/70 px-5 py-3 text-sm font-semibold text-gray-100 shadow-soft transition-transform hover:-translate-y-0.5">
+              Start a meeting
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
-          <div className="relative max-w-4xl pr-0 sm:pr-24 lg:pr-32">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-700">
-              <Sparkles className="h-3.5 w-3.5" />
-              Professional workspace
-            </div>
-            <h1 className="mt-5 max-w-3xl text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight text-gray-100 leading-[0.9]">
-              A fluid platform for clipboard, sharing, and live meetings.
-            </h1>
-            <p className="mt-5 max-w-2xl text-base sm:text-lg text-gray-500 leading-relaxed">
-              The app opens on a quieter, more editorial dashboard with a slow student animation in the corner, so the platform feels branded and intentional before the workspace appears.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/clipboard" className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-soft-lg transition-transform hover:-translate-y-0.5">
-                Open clipboard
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link to="/share" className="inline-flex items-center gap-2 rounded-full bg-white/70 px-5 py-3 text-sm font-semibold text-gray-100 shadow-soft transition-transform hover:-translate-y-0.5">
-                Create a share
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link to="/meetings" className="inline-flex items-center gap-2 rounded-full bg-white/70 px-5 py-3 text-sm font-semibold text-gray-100 shadow-soft transition-transform hover:-translate-y-0.5">
-                Start a meeting
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {signals.map((signal, index) => (
-                <div key={signal} className="rounded-[2rem] bg-white/55 p-5 shadow-soft">
-                  <div className="text-xs uppercase tracking-[0.2em] text-gray-500">0{index + 1}</div>
-                  <p className="mt-3 text-sm sm:text-base text-gray-100 leading-relaxed">{signal}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="space-y-4">
-            {actionLinks.map((item) => <ActionRail key={item.title} {...item} />)}
-          </div>
-
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.72),rgba(255,244,244,0.58))] p-6 sm:p-7 shadow-soft">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(224,20,20,0.08),transparent_35%)]" />
-            <div className="relative flex h-full flex-col justify-between gap-8">
-              <div>
-                <p className="text-xs uppercase tracking-[0.24em] text-gray-500">Platform pulse</p>
-                <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight text-gray-100">
-                  Built to feel polished in a resume walkthrough.
-                </h2>
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {signals.map((signal, index) => (
+              <div key={signal} className="rounded-[2rem] bg-white/55 p-5 shadow-soft">
+                <div className="text-xs uppercase tracking-[0.2em] text-gray-500">0{index + 1}</div>
+                <p className="mt-3 text-sm sm:text-base text-gray-100 leading-relaxed">{signal}</p>
               </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-[2rem] bg-white/55 p-5 shadow-soft">
-                  <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Motion</p>
-                  <p className="mt-2 text-sm text-gray-100">Slow introductory animation with a small student graphic gliding across.</p>
-                </div>
-                <div className="rounded-[2rem] bg-white/55 p-5 shadow-soft">
-                  <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Feel</p>
-                  <p className="mt-2 text-sm text-gray-100">Editorial layout, softer hierarchy, and less box-heavy chrome.</p>
-                </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="space-y-4">
+          {actionLinks.map((item) => <ActionRail key={item.title} {...item} />)}
+        </div>
+
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.72),rgba(255,244,244,0.58))] p-6 sm:p-7 shadow-soft">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(224,20,20,0.08),transparent_35%)]" />
+          <div className="relative flex h-full flex-col justify-between gap-8">
+            <div>
+              <p className="text-xs uppercase tracking-[0.24em] text-gray-500">Platform pulse</p>
+              <h2 className="mt-3 text-2xl sm:text-3xl font-semibold tracking-tight text-gray-100">
+                Built to feel polished in a resume walkthrough.
+              </h2>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="rounded-[2rem] bg-white/55 p-5 shadow-soft">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Motion</p>
+                <p className="mt-2 text-sm text-gray-100">Slow introductory animation with a small student graphic gliding across.</p>
+              </div>
+              <div className="rounded-[2rem] bg-white/55 p-5 shadow-soft">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-500">Feel</p>
+                <p className="mt-2 text-sm text-gray-100">Editorial layout, softer hierarchy, and less box-heavy chrome.</p>
               </div>
             </div>
           </div>
-        </section>
-      </div>
-    </div>);
+        </div>
+      </section>
+    </div>
+  </div>);
 }

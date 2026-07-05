@@ -17,9 +17,12 @@ function IntroSplash() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(224,20,20,0.12),transparent_28%),linear-gradient(180deg,#ffffff_0%,#f7f7f8_100%)]" />
       <div className="ambient-bg opacity-70" />
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
-        <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-gray-800/10 bg-white/80 px-4 py-2 shadow-soft animate-rise">
-          <span className="inline-flex h-3 w-3 rounded-full bg-brand-600 animate-glow" />
-          <span className="text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">Loading workspace</span>
+        <div className="mb-8 inline-flex items-center gap-3 animate-rise">
+          <span className="relative inline-flex h-4 w-14 overflow-hidden">
+            <span className="absolute inset-y-1/2 left-0 h-px w-full -translate-y-1/2 bg-gradient-to-r from-transparent via-brand-600/50 to-transparent" />
+            <span className="absolute left-0 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-brand-600 shadow-[0_0_18px_rgba(224,20,20,0.65)] animate-glow" />
+          </span>
+          <span className="text-[11px] font-semibold uppercase tracking-[0.34em] text-gray-500/80">Loading workspace</span>
         </div>
 
         <div className="relative h-44 w-full max-w-4xl overflow-hidden">
