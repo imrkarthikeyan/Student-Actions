@@ -68,7 +68,11 @@ fastapi_app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handle
 
 fastapi_app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:5173",
+    ],
+    allow_origin_regex=r"https://.*\.onrender\.com",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -108,7 +112,11 @@ socket_app = socketio.ASGIApp(sio, other_asgi_app=fastapi_app, socketio_path="/w
 # traffic keep the same origin policy as the FastAPI app.
 app = CORSMiddleware(
     socket_app,
-    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:5173",
+    ],
+    allow_origin_regex=r"https://.*\.onrender\.com",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
