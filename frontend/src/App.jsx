@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AppLayout } from './components/layout/AppLayout';
 import { DashboardPage } from './pages/DashboardPage';
@@ -9,6 +9,13 @@ import { MeetingsPage } from './pages/MeetingsPage';
 import { MeetingRoomPage } from './pages/MeetingRoomPage';
 import { ConvertPage } from './pages/ConvertPage';
 export function App() {
+
+function RootRedirect() {
+    const location = useLocation();
+    const redirectPath = new URLSearchParams(location.search).get('redirect');
+    return <Navigate to={redirectPath || '/dashboard'} replace />;
+}
+
     return (<BrowserRouter>
       <Toaster position="top-right" toastOptions={{
             style: { background: '#ffffff', color: '#0f0f11', border: '2px solid #e01414', fontWeight: 600 },
@@ -18,14 +25,14 @@ export function App() {
       <Routes>
         <Route path="/meetings/:roomCode" element={<MeetingRoomPage />}/>
         <Route element={<AppLayout />}>
-          <Route index element={<Navigate to="/clipboard" replace/>}/>
+          <Route index element={<RootRedirect />}/>
           <Route path="/dashboard" element={<DashboardPage />}/>
           <Route path="/clipboard" element={<ClipboardPage />}/>
           <Route path="/workspaces" element={<WorkspacesPage />}/>
           <Route path="/share" element={<SharePage />}/>
           <Route path="/convert" element={<ConvertPage />}/>
           <Route path="/meetings" element={<MeetingsPage />}/>
-          <Route path="*" element={<Navigate to="/clipboard" replace/>}/>
+          <Route path="*" element={<Navigate to="/dashboard" replace/>}/>
         </Route>
       </Routes>
     </BrowserRouter>);
