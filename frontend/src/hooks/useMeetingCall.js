@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { io } from 'socket.io-client';
 import { API_BASE_URL } from '../services/api';
+import { MEETING_MEDIA_CONSTRAINTS } from '../utils/media';
 const ICE_SERVERS = {
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
 };
@@ -54,7 +55,7 @@ export function useMeetingCall(roomCode, displayName, enabled) {
         let cancelled = false;
         async function start() {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                const stream = await navigator.mediaDevices.getUserMedia(MEETING_MEDIA_CONSTRAINTS);
                 if (cancelled) {
                     stream.getTracks().forEach((t) => t.stop());
                     return;
@@ -66,7 +67,7 @@ export function useMeetingCall(roomCode, displayName, enabled) {
                 setError('Could not access camera or microphone. Check browser permissions and try again.');
                 return;
             }
-            const socket = io(API_BASE_URL || '/', { path: '/ws/socket.io', transports: ['websocket'] });
+            const socket = io(API_BASE_URL || '/', { path: '/ws/socket.io' });
             socketRef.current = socket;
             socket.on('connect', () => {
                 setConnected(true);

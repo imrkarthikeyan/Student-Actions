@@ -36,8 +36,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Baloo 2', 'system-ui', 'sans-serif'],
-        display: ['"Press Start 2P"', 'monospace'],
+        sans: ['Inter', 'Segoe UI', 'system-ui', 'sans-serif'],
+        display: ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       boxShadow: {
